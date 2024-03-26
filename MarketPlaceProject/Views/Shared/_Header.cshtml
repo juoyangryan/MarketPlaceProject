@@ -1,0 +1,45 @@
+﻿<div class="header" style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: linear-gradient(to bottom, #006CA3, #FFFFFF);">
+    <div class="logo" style="flex-grow: 1;">
+        <a href="@Url.Action("Index", "Home")">
+            <img src="@Url.Content("~/Content/Images/joole_logo.png")" alt="Logo" style="height: auto; width: 100px; max-width: 100%;">
+        </a>
+    </div>
+    <div class="search-bar" style="flex-grow: 2; text-align: center;">
+        @Html.Partial("_SearchBar")
+    </div>
+    <div class="user-profile" style="flex-grow: 1; text-align: right;">
+        <img src="@Url.Content("~/Content/Images/me.jpg")" alt="User Profile" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+    </div>
+</div>
+<style>
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        background: linear-gradient(to bottom, #006CA3, #FFFFFF);
+    }
+
+    .logo, .search-bar, .user-profile {
+        text-align: center;
+    }
+
+    .logo img, .user-profile img {
+        border-radius: 50%;
+    }
+
+    .logo {
+        flex-grow: 1;
+    }
+
+    .search-bar {
+        flex-grow: 2;
+    }
+
+    .user-profile {
+        flex-grow: 1;
+        text-align: right;
+    }
+
+</style>
+

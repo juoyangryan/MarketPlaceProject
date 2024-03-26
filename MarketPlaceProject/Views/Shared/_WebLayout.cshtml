@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "_WebLayout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #006CA3, #FFFFFF); /* Blue to white gradient */
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center; /* Center logo horizontally */
+            align-items: center; /* Center logo vertically */
+            height: 30vh; /* Take up half the viewport height */
+        }
+
+        .logo {
+            /* Adjust as needed */
+            width: 300px; /* Example width, adjust as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .container.body-content {
+            padding-top: 20px; /* Additional space from the logo to the content */
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="~/Content/Images/joole_logo.png" alt="Logo" class="logo" />
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+       
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
