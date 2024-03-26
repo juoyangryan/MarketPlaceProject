@@ -1,23 +1,136 @@
-﻿
+﻿@model MarketPlaceProject.Models.User
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_WebLayout.cshtml";
+    Html.EnableClientValidation(true);
 }
 
-<div class="row row-cols-1 justify-content-center gy-2">
-    <form>
-        <div class="col">
-            <div class="form-floating">
-                <input type="text" id="email_or_username" class="form-control" placeholder="Username or Email" />
-                <label class="form-label">Username or Email</label>
-            </div>
-        </div>
-        <div class="col">
-            <div class="form-floating">
-                <input type="text" id="password" class="form-control" placeholder="Password" />
-                <label class="form-label">Password</label>
-            </div>
-        </div>
-    </form>
+<style>
+    .profile-pic-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #808080;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    .profile-pic-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
+<div class="row fixed-top d-flex justify-content-end">
+    <div class="col-1 mx-5 mt-2">
+        <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modal"><strong>Sign up</strong></button>
+    </div>
 </div>
+
+<div class="text-center">
+    <h2 class="mb-4">Building Product Selection Platform</h2>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form>
+            <div class="input-group">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="usernameOrEmail" placeholder="name@example.com">
+                    <label for="usernameOrEmail">Username or Email</label>
+                </div>
+                <span class="input-group-text mb-3"><i class="bi bi-person"></i></span>
+            </div>
+            <div class="input-group">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+                <span class="input-group-text mb-3"><i class="bi bi-lock"></i></span>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary px-5">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade modal-lg" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Register as User</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Register", "Registration", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <div class="row form-group mb-2">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-8">
+                            <p class="fw-bold">Image Preview</p>
+                            <div class="profile-pic-preview" id="imagePreview">
+                                <img src="#" alt="Profile Picture Preview" style="display:none;" id="previewImg" />
+                            </div>
+                            <label for="ProfilePicture" class="control-label fw-bold">Your Profile Picture</label> <br />
+                            @Html.TextBoxFor(m => m.ProfilePicture, new { type = "file", accept = "image/*", onchange = "previewImage();", id = "profilePicture" })
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 gy-1 mb-2">
+                        @Html.LabelFor(m => m.Username, "UserName:", new { @class = "control-label col-sm-4 fw-bold" })
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "User Name" })
+                            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(m => m.Email, "Email Address:", new { @class = "control-label col-sm-4 fw-bold" })
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email Id" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(m => m.Password, "Password:", new { @class = "control-label col-sm-4 fw-bold" })
+                        <div class="col-sm-8">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password:", new { @class = "control-label col-sm-4 fw-bold" })
+                        <div class="col-sm-8">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage() {
+        var preview = document.getElementById('previewImg');
+        var file = document.getElementById('profilePicture').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = "block";
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+            preview.style.display = "none";
+        }
+    }
+</script>
+
+
 
