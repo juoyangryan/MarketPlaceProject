@@ -188,6 +188,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Result.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_RegistrationModal.cshtml" />
+    <Content Include="Views\Shared\_RegistrationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
