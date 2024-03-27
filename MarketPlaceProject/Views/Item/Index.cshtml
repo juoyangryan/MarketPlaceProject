@@ -1,0 +1,33 @@
+﻿
+
+@model IEnumerable<DomainLayer.Models.Item>
+
+@{
+    ViewBag.Title = "Items";
+}
+
+<h2>Items List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <!-- Add more columns as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <!-- Add more cells for additional properties -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+
