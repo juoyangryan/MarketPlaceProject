@@ -1,0 +1,107 @@
+﻿<form>
+    <div class="card">
+        <div class="card-body">
+            <div class="row text-center mb-3">
+                <div class="col">
+                    <button class="btn btn-primary" type="button">Apply</button>
+                    <button class="btn btn-primary" type="button">Clear</button>
+                    <button class="btn btn-primary" type="button">Compare</button>
+                </div>
+            </div>
+        </div>
+        <div class="accordion accordion-flush mb-3">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Product Type
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                    <div class="accordion-body">
+                        <label class="form-label fw-bold">Model Year</label>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="From" min="1700">
+                            <span class="input-group-text"> to </span>
+                            <input type="number" class="form-control" placeholder="To" min="1700">
+                        </div>
+                        <div>
+                            <label class="form-label fw-bold">Use Type</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Commercial
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Residential
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Industrial
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Technical Specifications
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
+                    <div class="accordion-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <button class="btn btn-secondary me-2" type="button">
+                                <i class="bi bi-sort-numeric-down"></i>
+                            </button>
+                            <label class="form-label fw-bold">Power (W)</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="From" min="0">
+                            <span class="input-group-text"> - </span>
+                            <input type="number" class="form-control" placeholder="To" min="0">
+                        </div>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <button class="btn btn-secondary me-2" type="button">
+                                <i class="bi bi-sort-numeric-down"></i>
+                            </button>
+                            <label class="form-label fw-bold">Height (in)</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="From" min="0">
+                            <span class="input-group-text"> - </span>
+                            <input type="number" class="form-control" placeholder="To" min="0">
+                        </div>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <button class="btn btn-secondary me-2" type="button">
+                                <i class="bi bi-sort-numeric-down"></i>
+                            </button>
+                            <label class="form-label fw-bold">Weight (lbs)</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="From" min="0">
+                            <span class="input-group-text"> - </span>
+                            <input type="number" class="form-control" placeholder="To" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

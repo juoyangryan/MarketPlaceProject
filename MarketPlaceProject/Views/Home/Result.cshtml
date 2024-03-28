@@ -1,20 +1,12 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_ResultLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Result</title>
-</head>
-@Html.Partial("_Header")
-<body>
-    <div>
+<div class="row">
+    <div class="col-3">
+        @Html.Partial("_Filter")
     </div>
-</body>
-</html>
+</div>
+
