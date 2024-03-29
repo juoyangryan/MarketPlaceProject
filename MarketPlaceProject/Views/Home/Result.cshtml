@@ -1,7 +1,7 @@
 ﻿@model List<MarketPlaceProject.Models.Product>
 @{
     ViewBag.Title = "Result";
-    Layout = "~/Views/Shared/_ResultLayout.cshtml";
+    Layout = "~/Views/Shared/_LayoutWithSearchFluid.cshtml";
 }
 
 <div class="row">
@@ -29,7 +29,7 @@
                                         Compare
                                     </label>
                                 </div>
-                                <a href="#" class="btn btn-primary">View Details</a>
+                                @Html.ActionLink("View Details", "ProductSummary", new { id = product.ProductID}, new {@class = "btn btn-primary"})
                             </div>
                         </div>
                     </div>

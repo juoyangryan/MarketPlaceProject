@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
@@ -73,6 +74,37 @@ namespace MarketPlaceProject.Controllers
                 }
             };
             return View(products);
+        }
+
+        public ActionResult ProductSummary(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            // Find Product from DB
+            // Dummy Data for now
+            Product product = new Product
+            {
+                ProductID = 1,
+                Manufacture = "Big Ass",
+                Series = "Haiku H",
+                Model = "S3-150-S0-BC",
+                UseType = "Commercial",
+                Application = "Indoor",
+                MountingLocation = "Roof",
+                Accessories = "With Light",
+                ModelYear = 2016,
+                Power = 20.10,
+                Height = 30.5,
+                Weight = 13,
+                ImageUrl = "~/Content/Images/fan1.jpeg"
+            };
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
         }
 
         // GET: Home/Login

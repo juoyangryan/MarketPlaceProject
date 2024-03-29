@@ -192,8 +192,10 @@
     <Content Include="Views\Shared\_RegistrationModal.cshtml" />
     <Content Include="Views\Shared\_RegistrationSuccess.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />
-    <Content Include="Views\Shared\_ResultLayout.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithSearchFluid.cshtml" />
     <Content Include="Views\Home\Result.cshtml" />
+    <Content Include="Views\Home\ProductSummary.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
