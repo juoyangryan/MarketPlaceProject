@@ -1,0 +1,115 @@
+﻿@model List<MarketPlaceProject.Models.Product>
+
+@{
+    ViewBag.Title = "Compare";
+    Layout = "~/Views/Shared/_LayoutWithSearch.cshtml";
+}
+
+<div class="row">
+    @Html.Partial("_Breadcrumb")
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 20%"></th>
+                    @foreach (var product in Model)
+                    {
+                        <td><img src="~/Content/Images/fan1.jpeg" class="img-fluid" /></td>
+                    }
+                </tr>
+                <tr>
+                    <th colspan=@(Model.Count + 1) class="table-secondary">Description</th>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Manufacture</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Manufacture</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Series</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Series</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Model</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Model</td>
+                    }
+                </tr>
+
+                <tr>
+                    <th colspan=@(Model.Count + 1) class="table-secondary">Type</th>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Use Type</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.UseType</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Application</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Application</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Mounting Location</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.MountingLocation</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Accessories</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Accessories</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Model Year</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.ModelYear</td>
+                    }
+                </tr>
+
+                <tr>
+                    <th colspan=@(Model.Count + 1) class="table-secondary">Technical Specifications</th>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Power (W)</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Power</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Height (in)</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Height</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Weight (lbs)</th>
+                    @foreach (var product in Model)
+                    {
+                        <td>@product.Weight</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

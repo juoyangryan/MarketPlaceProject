@@ -196,6 +196,8 @@
     <Content Include="Views\Home\Result.cshtml" />
     <Content Include="Views\Home\ProductSummary.cshtml" />
     <Content Include="Views\Shared\_LayoutWithSearch.cshtml" />
+    <Content Include="Views\Shared\_Breadcrumb.cshtml" />
+    <Content Include="Views\Home\Compare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
