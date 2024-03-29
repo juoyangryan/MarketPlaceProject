@@ -1,0 +1,85 @@
+﻿@model MarketPlaceProject.Models.Product
+
+@{
+    ViewBag.Title = "ProductSummary";
+    Layout = "~/Views/Shared/_LayoutWithSearch.cshtml";
+}
+
+<h2 class="mt-3">Product Summary</h2>
+<hr />
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h4>DESCRIPTION</h4>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="table-secondary">Manufacture</th>
+                            <td>@Model.Manufacture</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="table-secondary">Series</th>
+                            <td>@Model.Series</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="table-secondary">Model</th>
+                            <td>@Model.Model</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>TYPE</h4>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="table-secondary">Use Type</th>
+                            <td>@Model.UseType</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="table-secondary">Application</th>
+                            <td>@Model.Application</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="table-secondary">Mounting Location</th>
+                            <td>@Model.MountingLocation</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="table-secondary">Accessories</th>
+                            <td>@Model.Accessories</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="table-secondary">Model Year</th>
+                            <td>@Model.ModelYear</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col">
+            <h4>TECHNICAL SPECIFICATIONS</h4>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="table-secondary">Power (W)</th>
+                        <td>@Model.Power</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table-secondary">Height (in)</th>
+                        <td>@Model.Height</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table-secondary">Weight (lbs)</th>
+                        <td>@Model.Weight</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

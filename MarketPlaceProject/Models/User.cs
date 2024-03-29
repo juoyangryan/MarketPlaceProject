@@ -15,6 +15,8 @@ namespace MarketPlaceProject.Models
         [EmailAddress(ErrorMessage = "Must be a valid Email Address")]
         public string Email { get; set; }
 
+        public string UsernameOrEmail { get; set; }
+
         [Required(ErrorMessage = "Password Required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -24,7 +26,6 @@ namespace MarketPlaceProject.Models
         [Compare("Password", ErrorMessage = "Passwords don't match")]
         public string ConfirmPassword { get; set; }
 
-        //public byte[] ProfilePicture { get; set; }
         public string ProfilePicture { get; set; }
     }
 }

@@ -1,20 +1,41 @@
-﻿
+﻿@model List<MarketPlaceProject.Models.Product>
 @{
-    Layout = null;
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_LayoutWithSearchFluid.cshtml";
 }
 
-<!DOCTYPE html>
-
-
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Result</title>
-</head>
-@Html.Partial("_Header")
-<body>
-    <div>
+<div class="row">
+    <div class="col-3">
+        @Html.Partial("_Filter")
     </div>
-</body>
-</html>
+    <div class="col">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-3 mb-4">
+                    <div class="card">
+                        <img src="~/Content/Images/fan1.jpeg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">@product.Manufacture</h6>
+                            <h6 class="card-subtitle text-muted">@product.Series Series</h6>
+                            <h6 class="card-subtitle text-muted mb-3">@product.Model</h6>
+                            <p class="card-text m-0">Power (W): @product.Power</p>
+                            <p class="card-text m-0">Height (in): @product.Height</p>
+                            <p class="card-text">Weight (lbs): @product.Weight</p>
+                            <div class="d-flex justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Compare
+                                    </label>
+                                </div>
+                                @Html.ActionLink("View Details", "ProductSummary", new { id = product.ProductID}, new {@class = "btn btn-primary"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

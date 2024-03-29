@@ -154,6 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -175,6 +176,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Images\ExampleLogo.png" />
+    <Content Include="Content\Images\fan1.jpeg" />
     <Content Include="Content\Images\joole_logo.png" />
     <Content Include="Content\Images\magnifier-icon.png" />
     <Content Include="Content\Images\me.jpg" />
@@ -216,9 +218,17 @@
     <Content Include="Views\Shared\_SearchBar.cshtml" />
     <Content Include="Views\Shared\_WebLayout.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Result.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Item\Index.cshtml" />
+
+
+    <Content Include="Views\Shared\_RegistrationModal.cshtml" />
+    <Content Include="Views\Shared\_RegistrationSuccess.cshtml" />
+    <Content Include="Views\Shared\_Filter.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithSearchFluid.cshtml" />
+    <Content Include="Views\Home\Result.cshtml" />
+    <Content Include="Views\Home\ProductSummary.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithSearch.cshtml" />
+    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
