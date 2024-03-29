@@ -155,6 +155,46 @@ namespace MarketPlaceProject.Controllers
             }
         }
 
+        public ActionResult Compare()
+        {
+            List<Product> products = new List<Product>()
+            {
+                new Product
+                {
+                    ProductID = 1,
+                    Manufacture = "Big Ass",
+                    Series = "Haiku H",
+                    Model = "S3-150-S0-BC",
+                    UseType = "Commercial",
+                    Application = "Indoor",
+                    MountingLocation = "Roof",
+                    Accessories = "With Light",
+                    ModelYear = 2016,
+                    Power = 20.10,
+                    Height = 30.5,
+                    Weight = 13,
+                    ImageUrl = "~/Content/Images/fan1.jpeg"
+                },
+                new Product
+                {
+                    ProductID = 2,
+                    Manufacture = "Big Ass",
+                    Series = "Haiku H",
+                    Model = "S3-150-S0-BC",
+                    UseType = "Commercial",
+                    Application = "Indoor",
+                    MountingLocation = "Roof",
+                    Accessories = "With Light",
+                    ModelYear = 2016,
+                    Power = 20.10,
+                    Height = 30.5,
+                    Weight = 13,
+                    ImageUrl = "~/Content/Images/fan1.jpeg"
+                }
+            };
+            return View(products);
+        }
+
         private bool isValidUser(string usernameOrEmail, string password)
         {
             return true;
