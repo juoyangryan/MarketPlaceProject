@@ -45,7 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ISubCategoryRepository.cs" />
+    <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\ISubCategoryService.cs" />
     <Compile Include="Interfaces\IItemRepository.cs" />
+    <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IItemService.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Item.cs" />

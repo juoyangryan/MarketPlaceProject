@@ -1,9 +1,26 @@
 ﻿@{
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_WebLayout.cshtml";
 }
+@using DomainLayer.Models;
 
-<!-- Include the search bar partial view -->
-@Html.Partial("_SearchBar")
+<!-- Search Bar -->
+<div class="search-container" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 10px;">
+    <select id="categorySelect" style="flex-grow: 0.1; min-height: 34px; color: black; background-color: #005682; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
+        <option value="0">All</option>
+        @foreach (Category category in ViewBag.Categories)
+        {
+            <option value="@category.ID">@category.Name</option>
+        }
+    </select>
+
+
+    <input id="tags" style="flex-grow: 2; min-width: 150px; min-height: 35px; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
+
+    <button id="searchButton" style="flex-grow: 0; min-height: 34px; border-radius: 5px; border: 2px solid #005682; box-shadow: none; background-color: #005682; color: white; outline: none;">
+        <img src="~/Content/Images/magnifier-icon.png" alt="Search" style="width: 24px; height: 24px;">
+    </button>
+</div>
 
 @section scripts {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -11,16 +28,43 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $(function () {
-            var availableTags = [
-                "ActionScript",
-                "AppleScript",
-                "Asp",
-                "Scheme"
-                // Add more tags as needed
-            ];
-            $("#tags").autocomplete({
-                source: availableTags
+            // Initially fetch all subcategories
+            fetchAllSubcategories();
+
+            function fetchAllSubcategories() {
+                $.getJSON('/Home/GetAllSubcategories', function (data) {
+                    var availableTags = data.map(item => item.Name);
+                    $("#tags").autocomplete({
+                        source: availableTags,
+                        minLength: 0, 
+                    }).focus(function () {
+                        // Use the "search" method to force the suggestions to display when the input gains focus
+                        $(this).autocomplete("search", "");
+                    });
+
+                });
+            }
+
+            function updateSubcategories(categoryId) {
+                if (categoryId == 0) { // If "All" is selected
+                    fetchAllSubcategories();
+                } else {
+                    $.getJSON('/Home/GetSubcategoriesByCategoryId', { categoryId: categoryId }, function (data) {
+                        var availableTags = data.map(item => item.Name);
+                        $("#tags").autocomplete({
+                            source: availableTags
+                        });
+                    });
+                }
+            }
+
+            $('#categorySelect').change(function () {
+                var selectedCategoryId = $(this).val();
+                updateSubcategories(selectedCategoryId);
             });
         });
     </script>
+
+
+
 }
