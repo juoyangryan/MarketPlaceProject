@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity; // If you're using EF 6. For EF Core, use Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +28,15 @@ namespace RepositoryLayer.Repositories
             // For EF Core, use _context.Items.ToListAsync()
             return await _context.Items.ToListAsync();
         }
+
+        public async Task<IEnumerable<Item>> GetBySubcategoryNameAsync(string subcategoryName)
+        {
+            return await _context.Items
+                                 .Where(item => item.SubCategories.Name.Equals(subcategoryName, StringComparison.OrdinalIgnoreCase))
+                                 .ToListAsync();
+        }
+
+
 
         public async Task AddAsync(Item item)
         {

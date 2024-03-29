@@ -11,6 +11,7 @@ namespace DomainLayer.Interfaces
     {
         Task<Item> GetByIdAsync(int id);
         Task<IEnumerable<Item>> GetAllAsync();
+        Task<IEnumerable<Item>> GetBySubcategoryNameAsync(string subcategoryName);
         Task AddAsync(Item item);
         Task UpdateAsync(Item item);
         Task DeleteAsync(int id);

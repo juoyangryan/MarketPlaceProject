@@ -7,7 +7,7 @@
 <!-- Search Bar -->
 <div class="search-container" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 10px;">
     <select id="categorySelect" style="flex-grow: 0.1; min-height: 34px; color: black; background-color: #005682; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
-        <option value="0">All</option>
+        <option value="0">Category</option>
         @foreach (Category category in ViewBag.Categories)
         {
             <option value="@category.ID">@category.Name</option>
@@ -36,7 +36,7 @@
                     var availableTags = data.map(item => item.Name);
                     $("#tags").autocomplete({
                         source: availableTags,
-                        minLength: 0, 
+                        minLength: 0,
                     }).focus(function () {
                         // Use the "search" method to force the suggestions to display when the input gains focus
                         $(this).autocomplete("search", "");
@@ -64,6 +64,23 @@
             });
         });
     </script>
+    <script>
+        $(function () {
+            $("#searchButton").click(function (e) {
+                var subcategoryName = $("#tags").val().trim(); // Trim whitespace
+                // Prevent search if the input is empty
+                if (subcategoryName === "") {
+                    alert("Please enter a subcategory name."); // Alert, or you can use a more user-friendly notification
+                    e.preventDefault(); // Prevent the action
+                } else {
+                    // Proceed with the search
+                    window.location.href = '/Home/SearchItemsBySubcategoryName?subcategoryName=' + encodeURIComponent(subcategoryName);
+                }
+            });
+        });
+
+    </script>
+
 
 
 

@@ -16,12 +16,18 @@ namespace DomainLayer.Models
         public decimal Price { get; set; }
 
         public string Manufacturer { get; set; }
+        public string Series { get; set; }
+        public string Model { get; set; }
         public int ProductYear { get; set; }
         public string UseType { get; set; }
         public string Application { get; set; }
         public string MountingLocation { get; set; }
         public string Accessories { get; set; }
-
+       
+        public decimal Power { get; set; }
+        public decimal Height { get; set; }
+        public decimal Weight { get; set; }
+        public string ImageUrl { get; set; }
         // Foreign key
         public int SubCategoryID { get; set; }
 

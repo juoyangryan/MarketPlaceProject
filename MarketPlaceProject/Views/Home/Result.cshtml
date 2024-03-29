@@ -1,4 +1,4 @@
-﻿@model List<MarketPlaceProject.Models.Product>
+﻿@model IEnumerable<DomainLayer.Models.Item>
 @{
     ViewBag.Title = "Result";
     Layout = "~/Views/Shared/_LayoutWithSearchFluid.cshtml";
@@ -14,9 +14,11 @@
             {
                 <div class="col-3 mb-4">
                     <div class="card">
-                        <img src="~/Content/Images/fan1.jpeg" class="card-img-top" alt="Product Image">
+                        <img src="@Url.Content(product.ImageUrl)" class="card-img-top img-fluid" alt="Product Image">
+
+
                         <div class="card-body text-center">
-                            <h6 class="card-title">@product.Manufacture</h6>
+                            <h6 class="card-title">@product.Manufacturer</h6>
                             <h6 class="card-subtitle text-muted">@product.Series Series</h6>
                             <h6 class="card-subtitle text-muted mb-3">@product.Model</h6>
                             <p class="card-text m-0">Power (W): @product.Power</p>
@@ -29,7 +31,7 @@
                                         Compare
                                     </label>
                                 </div>
-                                @Html.ActionLink("View Details", "ProductSummary", new { id = product.ProductID}, new {@class = "btn btn-primary"})
+                                @Html.ActionLink("View Details", "ProductSummary", new { id = product.ID }, new { @class = "btn btn-primary" })
                             </div>
                         </div>
                     </div>

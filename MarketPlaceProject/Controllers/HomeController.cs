@@ -14,14 +14,17 @@ using System.Web.Mvc;
 namespace MarketPlaceProject.Controllers
 {
     public class HomeController : Controller
+
     {
+        private readonly IItemService _itemService;
         private readonly ICategoryService _categoryService;
         private readonly ISubCategoryService _subcategoryService;
 
-        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService)
+        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService)
         {
             _categoryService = categoryService;
             _subcategoryService = subcategoryService;
+            _itemService = itemService;
         }
 
         public ActionResult Index()
@@ -66,43 +69,19 @@ namespace MarketPlaceProject.Controllers
             return Json(subcategoryData, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> SearchItemsBySubcategoryName(string subcategoryName)
+        {
+            var items = await _itemService.GetBySubcategoryNameAsync(subcategoryName);
+            return View("Result", items); 
+        }
+
+
 
         public ActionResult Result()
         {
             List<Product> products = new List<Product>()
             {
-                new Product
-                {
-                    ProductID = 1, 
-                    Manufacture = "Big Ass", 
-                    Series = "Haiku H", 
-                    Model = "S3-150-S0-BC", 
-                    UseType = "Commercial", 
-                    Application = "Indoor", 
-                    MountingLocation = "Roof", 
-                    Accessories = "With Light", 
-                    ModelYear = 2016, 
-                    Power = 20.10, 
-                    Height = 30.5, 
-                    Weight = 13, 
-                    ImageUrl = "~/Content/Images/fan1.jpeg"
-                },
-                new Product
-                {
-                    ProductID = 2,
-                    Manufacture = "Big Ass",
-                    Series = "Haiku H",
-                    Model = "S3-150-S0-BC",
-                    UseType = "Commercial",
-                    Application = "Indoor",
-                    MountingLocation = "Roof",
-                    Accessories = "With Light",
-                    ModelYear = 2016,
-                    Power = 20.10,
-                    Height = 30.5,
-                    Weight = 13,
-                    ImageUrl = "~/Content/Images/fan1.jpeg"
-                }
             };
             return View(products);
         }

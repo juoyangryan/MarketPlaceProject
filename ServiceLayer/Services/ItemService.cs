@@ -23,6 +23,10 @@ namespace ServiceLayer.Services
         {
             return await _itemRepository.GetAllAsync();
         }
+        public async Task<IEnumerable<Item>> GetBySubcategoryNameAsync(string subcategoryName)
+        {
+            return await _itemRepository.GetBySubcategoryNameAsync(subcategoryName);
+        }
 
         public async Task AddAsync(Item item)
         {
