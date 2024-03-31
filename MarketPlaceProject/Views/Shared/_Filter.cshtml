@@ -1,10 +1,12 @@
-﻿<form>
+﻿<form method="get" action="@Url.Action("FilterResults", "Home")">
+
     <div class="card">
         <div class="card-body">
             <div class="row text-center mb-3">
                 <div class="col">
-                    <button class="btn btn-primary" type="button">Apply</button>
-                    <button class="btn btn-primary" type="button">Clear</button>
+                    <input type="hidden" name="subcategoryName" value="@ViewBag.SubcategoryName">
+                    <button class="btn btn-primary" type="submit">Apply</button>
+                    <button class="btn btn-primary" type="button" id="clearFilters">Clear</button>
                     <button class="btn btn-primary" type="button" id="compareButton">Compare</button>
                 </div>
             </div>
@@ -20,27 +22,27 @@
                     <div class="accordion-body">
                         <label class="form-label fw-bold">Model Year</label>
                         <div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="From" min="1700">
+                            <input type="number" class="form-control" name="modelYearFrom" placeholder="From" value="@ViewBag.ModelYearFrom" min="1700">
                             <span class="input-group-text"> to </span>
-                            <input type="number" class="form-control" placeholder="To" min="1700">
+                            <input type="number" class="form-control" name="modelYearTo" placeholder="To" value="@ViewBag.ModelYearTo" min="1700">
                         </div>
                         <div>
                             <label class="form-label fw-bold">Use Type</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" name="useType" value="Commercial" id="useTypeCommercial" @(ViewBag.UseType == "Commercial" ? "checked" : "")>
+                                <label class="form-check-label" for="useTypeCommercial">
                                     Commercial
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
+                                <input class="form-check-input" type="checkbox" name="useType" value="Residential" id="useTypeResidential" @(ViewBag.UseType == "Residential" ? "checked" : "")>
+                                <label class="form-check-label" for="useTypeResidential">
                                     Residential
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
+                                <input class="form-check-input" type="checkbox" name="useType" value="Industrial" id="useTypeIndustrial" @(ViewBag.UseType == "Industrial" ? "checked" : "")>
+                                <label class="form-check-label" for="useTypeIndustrial">
                                     Industrial
                                 </label>
                             </div>
@@ -63,9 +65,9 @@
                             <label class="form-label fw-bold">Power (W)</label>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="From" min="0">
+                            <input type="number" class="form-control" placeholder="From" min="0" name="powerFrom" value="@ViewBag.PowerFrom">
                             <span class="input-group-text"> - </span>
-                            <input type="number" class="form-control" placeholder="To" min="0">
+                            <input type="number" class="form-control" placeholder="To" min="0" name="powerTo" value="@ViewBag.PowerTo">
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
@@ -75,9 +77,9 @@
                             <label class="form-label fw-bold">Height (in)</label>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="From" min="0">
+                            <input type="number" class="form-control" placeholder="From" min="0" name="heightFrom" value="@ViewBag.HeightFrom">
                             <span class="input-group-text"> - </span>
-                            <input type="number" class="form-control" placeholder="To" min="0">
+                            <input type="number" class="form-control" placeholder="To" min="0" name="heightTo" value="@ViewBag.Heightto">
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
@@ -87,9 +89,9 @@
                             <label class="form-label fw-bold">Weight (lbs)</label>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="From" min="0">
+                            <input type="number" class="form-control" placeholder="From" min="0" name="weightFrom" value="@ViewBag.WeightFrom">
                             <span class="input-group-text"> - </span>
-                            <input type="number" class="form-control" placeholder="To" min="0">
+                            <input type="number" class="form-control" placeholder="To" min="0" name="weightTo" value="@ViewBag.WeightTo">
                         </div>
                     </div>
                 </div>
@@ -97,3 +99,7 @@
         </div>
     </div>
 </form>
+
+
+
+

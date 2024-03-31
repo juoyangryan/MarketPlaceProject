@@ -42,6 +42,10 @@ namespace ServiceLayer.Services
         {
             await _itemRepository.DeleteAsync(id);
         }
+        public async Task<IEnumerable<Item>> GetFilteredAsync(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null, string subCategory = null)
+        {
+            return await _itemRepository.GetFilteredAsync(modelYearFrom, modelYearTo, useType, powerFrom, powerTo, heightFrom, heightTo, weightFrom, weightTo, subCategory);
+        }
 
         public async Task<IEnumerable<Item>> GetByIdListAsync(int[] ids)
         {

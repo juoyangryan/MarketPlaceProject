@@ -10,6 +10,10 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+
+using AutoMapper;
+
+
 using DomainLayer.Models;
 
 namespace MarketPlaceProject.Controllers
@@ -28,6 +32,15 @@ namespace MarketPlaceProject.Controllers
             _subcategoryService = subcategoryService;
             _itemService = itemService;
             _userService = userService;
+        }
+        // Auto Mapper
+        private readonly IMapper _mapper;
+        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService, IMapper mapper)
+        {
+            _categoryService = categoryService;
+            _subcategoryService = subcategoryService;
+            _itemService = itemService;
+            _mapper = mapper;
         }
 
         public ActionResult Index()
@@ -48,6 +61,7 @@ namespace MarketPlaceProject.Controllers
 
             return View();
         }
+
         public async Task<ActionResult> Search()
         {
             var categories = await _categoryService.GetAllAsync();
@@ -75,9 +89,36 @@ namespace MarketPlaceProject.Controllers
         [HttpGet]
         public async Task<ActionResult> SearchItemsBySubcategoryName(string subcategoryName)
         {
-            var items = await _itemService.GetBySubcategoryNameAsync(subcategoryName);
-            return View("Result", items); 
+            return RedirectToAction("FilterResults", new { subcategoryName = subcategoryName });
         }
+
+
+        [HttpGet]
+        public async Task<ActionResult> FilterResults(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null, string subcategoryName = "")
+        {
+            // Fetch filtered items based on the provided criteria, including subcategoryName
+            var items = await _itemService.GetFilteredAsync(modelYearFrom, modelYearTo, useType, powerFrom, powerTo, heightFrom, heightTo, weightFrom, weightTo, subcategoryName);
+
+            var itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(items); // Map domain models to DTOs
+
+            // Fetch categories for the filter sidebar in the results page
+            var categories = await _categoryService.GetAllAsync();
+            ViewBag.Categories = categories;
+            //pass the filter input
+            ViewBag.ModelYearFrom = modelYearFrom;
+            ViewBag.ModelYearTo = modelYearTo;
+            ViewBag.UseType = useType;
+            ViewBag.PowerFrom = powerFrom;
+            ViewBag.PowerTo = powerTo;
+            ViewBag.HeightFrom = heightFrom;
+            ViewBag.HeightTo = heightTo;
+            ViewBag.WeightFrom = weightFrom;
+            ViewBag.WeightTo = weightTo;
+            ViewBag.SubcategoryName = subcategoryName;
+
+            return View("Result", itemDTOs); // Return the filtered items to the Result view
+        }
+
 
 
 
