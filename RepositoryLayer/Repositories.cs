@@ -60,7 +60,47 @@ namespace RepositoryLayer.Repositories
             }
         }
 
-       
+        public async Task<IEnumerable<Item>> GetFilteredAsync(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null, string subcategoryName = null)
+        {
+            var query = _context.Items.AsQueryable();
+
+            if (modelYearFrom.HasValue)
+                query = query.Where(item => item.ProductYear >= modelYearFrom.Value);
+
+            if (modelYearTo.HasValue)
+                query = query.Where(item => item.ProductYear <= modelYearTo.Value);
+
+            if (!string.IsNullOrWhiteSpace(useType))
+                query = query.Where(item => item.UseType.Equals(useType, StringComparison.OrdinalIgnoreCase));
+
+            if (powerFrom.HasValue)
+                query = query.Where(item => item.Power >= powerFrom.Value);
+
+            if (powerTo.HasValue)
+                query = query.Where(item => item.Power <= powerTo.Value);
+
+            if (heightFrom.HasValue)
+                query = query.Where(item => item.Height >= heightFrom.Value);
+
+            if (heightTo.HasValue)
+                query = query.Where(item => item.Height <= heightTo.Value);
+
+            if (weightFrom.HasValue)
+                query = query.Where(item => item.Weight >= weightFrom.Value);
+
+            if (weightTo.HasValue)
+                query = query.Where(item => item.Weight <= weightTo.Value);
+
+            // Filter by subcategoryName if provided
+            if (!string.IsNullOrWhiteSpace(subcategoryName))
+            {
+                query = query.Where(item => item.SubCategories.Name.Equals(subcategoryName, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return await query.ToListAsync();
+        }
+
+
     }
 
     public class CategoryRepository : ICategoryRepository

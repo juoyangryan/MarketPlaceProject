@@ -12,5 +12,7 @@ namespace DomainLayer.Interfaces
         Task AddAsync(Item item);
         Task UpdateAsync(Item item);
         Task DeleteAsync(int id);
+
+        Task<IEnumerable<Item>> GetFilteredAsync(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null,string subCategory = null);
     }
 }
