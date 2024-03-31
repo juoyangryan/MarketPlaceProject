@@ -185,43 +185,33 @@ namespace MarketPlaceProject.Controllers
             }
         }
 
-        public ActionResult Compare()
+        public async Task<ActionResult> Compare()
         {
-            List<Product> products = new List<Product>()
+            int[] ids = Array.ConvertAll(Request.Params["itemIds"].Split(','), s => int.Parse(s));
+
+            var comp_items = await _itemService.GetByIdListAsync(ids);
+
+            List<Product> products = new List<Product>();
+
+            foreach (var item in comp_items)
             {
-                new Product
+                products.Add(new Product
                 {
-                    ProductID = 1,
-                    Manufacture = "Big Ass",
-                    Series = "Haiku H",
-                    Model = "S3-150-S0-BC",
-                    UseType = "Commercial",
-                    Application = "Indoor",
-                    MountingLocation = "Roof",
-                    Accessories = "With Light",
-                    ModelYear = 2016,
-                    Power = 20.10m,
-                    Height = 30.5m,
-                    Weight = 13,
-                    ImageUrl = "~/Content/Images/fan1.jpeg"
-                },
-                new Product
-                {
-                    ProductID = 2,
-                    Manufacture = "Big Ass",
-                    Series = "Haiku H",
-                    Model = "S3-150-S0-BC",
-                    UseType = "Commercial",
-                    Application = "Indoor",
-                    MountingLocation = "Roof",
-                    Accessories = "With Light",
-                    ModelYear = 2016,
-                    Power = 20.10m,
-                    Height = 30.5m,
-                    Weight = 13,
-                    ImageUrl = "~/Content/Images/fan1.jpeg"
-                }
-            };
+                    ProductID = item.ID, 
+                    Manufacture = item.Manufacturer,
+                    Series = item.Series,
+                    Model = item.Model,
+                    UseType = item.UseType,
+                    Application = item.Application,
+                    MountingLocation = item.MountingLocation,
+                    Accessories = item.Accessories,
+                    ModelYear = item.ProductYear,
+                    Power = item.Power,
+                    Height = item.Height,
+                    Weight = item.Weight,
+                    ImageUrl = item.ImageUrl
+                });
+            }
             return View(products);
         }
 

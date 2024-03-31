@@ -12,5 +12,6 @@ namespace DomainLayer.Interfaces
         Task AddAsync(Item item);
         Task UpdateAsync(Item item);
         Task DeleteAsync(int id);
+        Task<IEnumerable<Item>> GetByIdListAsync(int[] ids);
     }
 }

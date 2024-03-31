@@ -29,7 +29,7 @@
                             <p class="card-text">Weight (lbs): @product.Weight</p>
                             <div class="d-flex justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input compare-check" type="checkbox" value=@product.ID id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Compare
                                     </label>
@@ -43,4 +43,36 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Event handler for the "Compare" button click
+            $('#compareButton').click(function () {
+                console.log("here")
+                // Array to store the IDs of selected items
+                var selectedItems = [];
+
+                // Loop through all checkboxes with class "form-check-input"
+                $('.compare-check').each(function () {
+                    // If the checkbox is checked, add its value (item ID) to the selectedItems array
+                    if ($(this).is(':checked')) {
+                        selectedItems.push($(this).val());
+                    }
+                });
+
+                // Check if the number of selected items is within the required range
+                if (selectedItems.length < 2 || selectedItems.length > 4) {
+                    alert('Please select at least 2 and at most 4 items to compare.');
+                    return; // Exit the function if the number of selected items is invalid
+                }
+
+                console.log(selectedItems)
+
+                // Redirect to the Compare action with the selected item IDs
+                window.location.href = '@Url.Action("Compare", "Home")' + '?itemIds=' + selectedItems.join(',');
+            });
+        });
+    </script>
+}
 

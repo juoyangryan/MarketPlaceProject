@@ -42,5 +42,10 @@ namespace ServiceLayer.Services
         {
             await _itemRepository.DeleteAsync(id);
         }
+
+        public async Task<IEnumerable<Item>> GetByIdListAsync(int[] ids)
+        {
+            return await _itemRepository.GetByIdListAsync(ids);
+        }
     }
 }

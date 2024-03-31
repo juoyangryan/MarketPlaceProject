@@ -60,7 +60,12 @@ namespace RepositoryLayer.Repositories
             }
         }
 
-       
+        public async Task<IEnumerable<Item>> GetByIdListAsync(int[] ids)
+        {
+            return await _context.Items.Where(item => ids.Contains(item.ID)).ToListAsync();
+        }
+
+
     }
 
     public class CategoryRepository : ICategoryRepository
