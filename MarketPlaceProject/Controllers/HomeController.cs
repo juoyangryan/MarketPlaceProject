@@ -90,29 +90,26 @@ namespace MarketPlaceProject.Controllers
         }
 
 
-        public ActionResult ProductSummary(int? id)
+        public async Task<ActionResult> ProductSummary(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             // Find Product from DB
+            Item item = await _itemService.GetByIdAsync(id);
             // Dummy Data for now
             Product product = new Product
             {
-                ProductID = 1,
-                Manufacture = "Big Ass",
-                Series = "Haiku H",
-                Model = "S3-150-S0-BC",
-                UseType = "Commercial",
-                Application = "Indoor",
-                MountingLocation = "Roof",
-                Accessories = "With Light",
-                ModelYear = 2016,
-                Power = 20.10,
-                Height = 30.5,
-                Weight = 13,
-                ImageUrl = "~/Content/Images/fan1.jpeg"
+                ProductID = item.ID,
+                Manufacture = item.Manufacturer,
+                Series = item.Series,
+                Model = item.Model,
+                UseType = item.UseType,
+                Application = item.Application,
+                MountingLocation = item.MountingLocation,
+                Accessories = item.Accessories,
+                ModelYear = item.ProductYear,
+                Power = item.Power,
+                Height = item.Height,
+                Weight = item.Weight,
+                ImageUrl = item.ImageUrl
             };
             if (product == null)
             {
@@ -203,8 +200,8 @@ namespace MarketPlaceProject.Controllers
                     MountingLocation = "Roof",
                     Accessories = "With Light",
                     ModelYear = 2016,
-                    Power = 20.10,
-                    Height = 30.5,
+                    Power = 20.10m,
+                    Height = 30.5m,
                     Weight = 13,
                     ImageUrl = "~/Content/Images/fan1.jpeg"
                 },
@@ -219,8 +216,8 @@ namespace MarketPlaceProject.Controllers
                     MountingLocation = "Roof",
                     Accessories = "With Light",
                     ModelYear = 2016,
-                    Power = 20.10,
-                    Height = 30.5,
+                    Power = 20.10m,
+                    Height = 30.5m,
                     Weight = 13,
                     ImageUrl = "~/Content/Images/fan1.jpeg"
                 }

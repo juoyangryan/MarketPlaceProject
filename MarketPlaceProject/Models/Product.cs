@@ -16,9 +16,9 @@ namespace MarketPlaceProject.Models
         public string MountingLocation { get; set; }
         public string Accessories { get; set; }
         public int ModelYear { get; set; }
-        public double Power { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
+        public decimal Power { get; set; }
+        public decimal Height { get; set; }
+        public decimal Weight { get; set; }
         public string ImageUrl { get; set; }
     }
 }
