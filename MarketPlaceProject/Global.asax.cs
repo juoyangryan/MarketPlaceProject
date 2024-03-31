@@ -44,6 +44,31 @@ namespace MarketPlaceProject
             builder.RegisterInstance(mapperConfig).As<MapperConfiguration>(); // Register configuration
             builder.Register<IMapper>(ctx => new Mapper(mapperConfig, type => ctx.Resolve(type))); // Register IMapper
 
+
+            // Register your types, e.g., services and repositories
+            builder.RegisterType<ItemService>().As<IItemService>();
+            builder.RegisterType<CategoryService>().As<ICategoryService>();
+            builder.RegisterType<SubCategoryService>().As<ISubCategoryService>();
+            builder.RegisterType<UserService>().As<IUserService>();
+            // Register the ItemContext. Adjust the lifetime scope as necessary.
+            builder.RegisterType<ItemContext>()
+                   .AsSelf() 
+                   .InstancePerLifetimeScope(); // Adjust this based on your requirements
+
+            // Register the ItemRepository to be resolved via its interface
+            builder.RegisterType<ItemRepository>()
+                   .As<IItemRepository>() 
+                   .InstancePerLifetimeScope();
+            builder.RegisterType<CategoryRepository>()
+                   .As<ICategoryRepository>()
+                    .InstancePerLifetimeScope();
+            builder.RegisterType<SubCategoryRepository>()
+                    .As<ISubCategoryRepository>()
+                    .InstancePerLifetimeScope();
+            builder.RegisterType<UserRepository>()
+                    .As<IUserRepository>()
+                    .InstancePerLifetimeScope();
+
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
