@@ -34,6 +34,7 @@ namespace MarketPlaceProject
             builder.RegisterType<ItemService>().As<IItemService>();
             builder.RegisterType<CategoryService>().As<ICategoryService>();
             builder.RegisterType<SubCategoryService>().As<ISubCategoryService>();
+            builder.RegisterType<UserService>().As<IUserService>();
             // Register the ItemContext. Adjust the lifetime scope as necessary.
             builder.RegisterType<ItemContext>()
                    .AsSelf() 
@@ -48,6 +49,9 @@ namespace MarketPlaceProject
                     .InstancePerLifetimeScope();
             builder.RegisterType<SubCategoryRepository>()
                     .As<ISubCategoryRepository>()
+                    .InstancePerLifetimeScope();
+            builder.RegisterType<UserRepository>()
+                    .As<IUserRepository>()
                     .InstancePerLifetimeScope();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

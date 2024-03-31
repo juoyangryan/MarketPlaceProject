@@ -162,4 +162,35 @@ namespace RepositoryLayer.Repositories
 
 
     }
+
+    public class UserRepository: IUserRepository
+    {
+        private readonly ItemContext _context;
+
+        public UserRepository(ItemContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<UserDTO> GetByIdAsync(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
+        public async Task<UserDTO> GetByUsernameAsync(string username)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+        }
+
+        public async Task<UserDTO> GetByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(y => y.Email == email);
+        }
+
+        public async Task AddUser(UserDTO userDTO)
+        {
+            _context.Users.Add(userDTO);
+            await _context.SaveChangesAsync();
+        }
+    }
 }

@@ -10,6 +10,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using DomainLayer.Models;
 
 namespace MarketPlaceProject.Controllers
 {
@@ -19,12 +20,14 @@ namespace MarketPlaceProject.Controllers
         private readonly IItemService _itemService;
         private readonly ICategoryService _categoryService;
         private readonly ISubCategoryService _subcategoryService;
+        private readonly IUserService _userService;
 
-        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService)
+        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService, IUserService userService)
         {
             _categoryService = categoryService;
             _subcategoryService = subcategoryService;
             _itemService = itemService;
+            _userService = userService;
         }
 
         public ActionResult Index()
@@ -126,23 +129,53 @@ namespace MarketPlaceProject.Controllers
 
         // POST: Home/Login
         [HttpPost]
-        public ActionResult Login(User user)
+        public async Task<ActionResult> Login(User user)
         {
-            if (isValidUser(user.UsernameOrEmail, user.Password))
+            if (await isValidUser(user.UsernameOrEmail, user.Password))
             {
                 return RedirectToAction("Search");
             }
+
+            // Remove registration model errors
+            ModelState.Remove("Username");
+            ModelState.Remove("Email");
+            ModelState.Remove("Password");
+            ModelState.Remove("ConfirmPassword");
+
             ModelState.AddModelError("", "Invalid Username or Password");
             return View(user);
         }
 
         // POST: Home/Register
         [HttpPost]
-        public ActionResult Register(User user)
+        public async Task<ActionResult> Register(User user)
         {
             if (ModelState.IsValid)
             {
-                // Save the user registration data to the database or perform other necessary actions
+                // Check if username is unique
+                var existingUserByUsername = await _userService.GetByUsernameAsync(user.Username);
+                if (existingUserByUsername != null)
+                {
+                    ModelState.AddModelError("Username", "The username is already in use.");
+                    return PartialView("_RegistrationModal", user);
+                }
+
+                // Check if Email is unique
+                var existingUserByEmail = await _userService.GetByEmailAsync(user.Email);
+                if (existingUserByEmail != null)
+                {
+                    ModelState.AddModelError("Email", "The email is already registered.");
+                    return PartialView("_RegistrationModal", user);
+                }
+
+                UserDTO userDTO = new UserDTO
+                {
+                    Username = user.Username,
+                    Email = user.Email,
+                    Password = user.Password,
+                    ProfilePicture = user.ProfilePicture
+                };
+                await _userService.AddUser(userDTO);
 
                 // Return success partial view
                 // Add Unsuccessful partial view if transaction failed
@@ -195,9 +228,19 @@ namespace MarketPlaceProject.Controllers
             return View(products);
         }
 
-        private bool isValidUser(string usernameOrEmail, string password)
+        private async Task<bool> isValidUser(string usernameOrEmail, string password)
         {
-            return true;
+            if (usernameOrEmail == null || password == null) { return false; }
+            var existingUserByUsername = await _userService.GetByUsernameAsync(usernameOrEmail);
+            var existingUserByEmail = await _userService.GetByEmailAsync(usernameOrEmail);
+            if (existingUserByUsername != null)
+            {
+                return existingUserByUsername.Password == password;
+            } else if (existingUserByEmail != null)
+            {
+                return existingUserByEmail.Password == password;
+            } else { return false; }
+
         }
     }
 }

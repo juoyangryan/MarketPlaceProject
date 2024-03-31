@@ -17,6 +17,7 @@ namespace RepositoryLayer
         public DbSet<Item> Items { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<UserDTO> Users { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
