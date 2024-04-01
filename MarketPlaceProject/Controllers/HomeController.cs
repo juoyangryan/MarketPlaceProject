@@ -15,6 +15,7 @@ using AutoMapper;
 
 
 using DomainLayer.Models;
+using ServiceLayer.Services;
 
 namespace MarketPlaceProject.Controllers
 {
@@ -26,20 +27,14 @@ namespace MarketPlaceProject.Controllers
         private readonly ISubCategoryService _subcategoryService;
         private readonly IUserService _userService;
 
-        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService, IUserService userService)
+        // Auto Mapper
+        private readonly IMapper _mapper;
+        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService, IMapper mapper, IUserService userService)
         {
             _categoryService = categoryService;
             _subcategoryService = subcategoryService;
             _itemService = itemService;
             _userService = userService;
-        }
-        // Auto Mapper
-        private readonly IMapper _mapper;
-        public HomeController(ICategoryService categoryService, ISubCategoryService subcategoryService, IItemService itemService, IMapper mapper)
-        {
-            _categoryService = categoryService;
-            _subcategoryService = subcategoryService;
-            _itemService = itemService;
             _mapper = mapper;
         }
 
@@ -89,7 +84,7 @@ namespace MarketPlaceProject.Controllers
         [HttpGet]
         public async Task<ActionResult> SearchItemsBySubcategoryName(string subcategoryName)
         {
-            return RedirectToAction("FilterResults", new { subcategoryName = subcategoryName });
+            return await Task.Run(() =>RedirectToAction("FilterResults", new { subcategoryName = subcategoryName }));
         }
 
 
@@ -133,6 +128,10 @@ namespace MarketPlaceProject.Controllers
 
         public async Task<ActionResult> ProductSummary(int id)
         {
+            // Fetch categories for the filter sidebar in the results page
+            var categories = await _categoryService.GetAllAsync();
+            ViewBag.Categories = categories;
+
             // Find Product from DB
             Item item = await _itemService.GetByIdAsync(id);
             // Dummy Data for now
@@ -228,6 +227,11 @@ namespace MarketPlaceProject.Controllers
 
         public async Task<ActionResult> Compare()
         {
+
+            // Fetch categories for the filter sidebar in the results page
+            var categories = await _categoryService.GetAllAsync();
+            ViewBag.Categories = categories;
+
             int[] ids = Array.ConvertAll(Request.Params["itemIds"].Split(','), s => int.Parse(s));
 
             var comp_items = await _itemService.GetByIdListAsync(ids);

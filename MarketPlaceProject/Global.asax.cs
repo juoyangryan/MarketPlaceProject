@@ -29,6 +29,7 @@ namespace MarketPlaceProject
             builder.RegisterType<ItemService>().As<IItemService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<SubCategoryService>().As<ISubCategoryService>().InstancePerLifetimeScope();
+            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             builder.RegisterType<ItemContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ItemRepository>().As<IItemRepository>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();

@@ -3,18 +3,6 @@
     ViewBag.Title = "Result";
     Layout = "~/Views/Shared/_LayoutWithSearchFluid.cshtml";
 }
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(document).on('click', '#clearFilters', function () {
-                // Example: Clearing input fields
-                $('input[type="number"], input[type="text"]').val('');
-                $('input[type="checkbox"]').prop('checked', false);
-            });
-        });
-    </script>
-}
 
 
 <div class="row">
@@ -58,6 +46,17 @@
 </div>
 
 @section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#clearFilters', function () {
+                // Example: Clearing input fields
+                $('input[type="number"], input[type="text"]').val('');
+                $('input[type="checkbox"]').prop('checked', false);
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             // Event handler for the "Compare" button click
