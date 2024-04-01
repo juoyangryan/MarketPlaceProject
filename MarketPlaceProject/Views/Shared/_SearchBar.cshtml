@@ -3,8 +3,8 @@
 }
 @using DomainLayer.Models;
 
-<div class="search-container" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 10px;">
-    <select id="categorySelect" style="flex-grow: 0.1; min-height: 34px; color: black; background-color: #005682; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
+<div class="search-container" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 10px; flex-wrap: nowrap;">
+    <select id="categorySelect" style="flex: 0 1 auto; min-width: 100px; min-height: 34px; color: black; background-color: #005682; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
         <option value="0">Category</option>
         @foreach (var category in ViewBag.Categories)
         {
@@ -12,12 +12,13 @@
         }
     </select>
 
-    <input id="tags" style="flex-grow: 2; min-width: 150px; min-height: 35px; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
+    <input id="tags" style="flex: 1 1 auto; min-width: 150px; min-height: 35px; border-radius: 5px; border: 2px solid #005682; box-shadow: none; outline: none;">
 
-    <button id="searchButton" style="flex-grow: 0; min-height: 34px; border-radius: 5px; border: 2px solid #005682; box-shadow: none; background-color: #005682; color: white; outline: none;">
+    <button id="searchButton" style="flex: 0 1 auto; min-width: 50px; min-height: 34px; border-radius: 5px; border: 2px solid #005682; box-shadow: none; background-color: #005682; color: white; outline: none;">
         <img src="~/Content/Images/magnifier-icon.png" alt="Search" style="width: 24px; height: 24px;">
     </button>
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -36,7 +37,7 @@
                     var availableTags = data.map(item => item.Name);
                     $("#tags").autocomplete({
                         source: availableTags,
-                        minLength: 0,
+                        minLength: 1,
                     }).focus(function () {
                         $(this).autocomplete("search", "");
                     });
