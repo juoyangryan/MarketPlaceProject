@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity; // If you're using EF 6. For EF Core, use Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using DomainLayer.Interfaces;
@@ -60,7 +61,7 @@ namespace RepositoryLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<Item>> GetFilteredAsync(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null, string subcategoryName = null)
+        public async Task<IEnumerable<Item>> GetFilteredAsync(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null, string subcategoryName = null, string sortOrder =null)
         {
             var query = _context.Items.AsQueryable();
 
@@ -95,6 +96,30 @@ namespace RepositoryLayer.Repositories
             if (!string.IsNullOrWhiteSpace(subcategoryName))
             {
                 query = query.Where(item => item.SubCategories.Name.Equals(subcategoryName, StringComparison.OrdinalIgnoreCase));
+            }
+            if (!string.IsNullOrWhiteSpace(sortOrder))
+            {
+                switch (sortOrder)
+                {
+                    case "weightAsc":
+                        query = query.OrderBy(item => item.Weight);
+                        break;
+                    case "weightDesc":
+                        query = query.OrderByDescending(item => item.Weight);
+                        break;
+                    case "heightAsc":
+                        query = query.OrderBy(item => item.Height);
+                        break;
+                    case "heightDesc":
+                        query = query.OrderByDescending(item => item.Height);
+                        break;
+                    case "powerAsc":
+                        query = query.OrderBy(item => item.Power);
+                        break;
+                    case "powerDesc":
+                        query = query.OrderByDescending(item => item.Power);
+                        break;
+                }
             }
 
             return await query.ToListAsync();

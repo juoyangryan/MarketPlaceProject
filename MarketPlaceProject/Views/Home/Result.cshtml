@@ -94,5 +94,32 @@
             });
         });
     </script>
+
+    <script>
+        $(".sort-button").click(function () {
+            var sortField = $(this).data("sort");
+            var currentSortOrder = $("#sortOrder").val();
+            var newSortOrder = "";
+
+            // Debugging
+            console.log("Current Sort Order:", currentSortOrder);
+
+            // Determine the new sort order based on the current value
+            if (currentSortOrder === sortField + "Asc") {
+                newSortOrder = sortField + "Desc";
+            } else {
+                newSortOrder = sortField + "Asc";
+            }
+
+            // Debugging
+            console.log("New Sort Order:", newSortOrder);
+
+            $("#sortOrder").val(newSortOrder); // Update the hidden input's value
+            $("form").submit(); // Submit the form with the new sort order
+        });
+
+    </script>
+
+
 }
 

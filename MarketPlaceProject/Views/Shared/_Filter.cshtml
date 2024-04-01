@@ -56,11 +56,12 @@
                         Technical Specifications
                     </button>
                 </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
+                <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo">
                     <div class="accordion-body">
                         <div class="d-flex align-items-center mb-3">
-                            <button class="btn btn-secondary me-2" type="button">
+                            <button type="button" class="btn btn-secondary sort-button" data-sort="power" title="Sort by Power">
                                 <i class="bi bi-sort-numeric-down"></i>
+                                <span class="visually-hidden">Sort by Power</span>
                             </button>
                             <label class="form-label fw-bold">Power (W)</label>
                         </div>
@@ -71,8 +72,9 @@
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
-                            <button class="btn btn-secondary me-2" type="button">
+                            <button type="button" class="btn btn-secondary sort-button" data-sort="height" title="Sort by Height">
                                 <i class="bi bi-sort-numeric-down"></i>
+                                <span class="visually-hidden">Sort by Height</span>
                             </button>
                             <label class="form-label fw-bold">Height (in)</label>
                         </div>
@@ -83,8 +85,10 @@
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
-                            <button class="btn btn-secondary me-2" type="button">
+
+                            <button type="button" class="btn btn-secondary sort-button" data-sort="weight" title="Sort by Weight">
                                 <i class="bi bi-sort-numeric-down"></i>
+                                <span class="visually-hidden">Sort by Weight</span>
                             </button>
                             <label class="form-label fw-bold">Weight (lbs)</label>
                         </div>
@@ -93,6 +97,11 @@
                             <span class="input-group-text"> - </span>
                             <input type="number" class="form-control" placeholder="To" min="0" name="weightTo" value="@ViewBag.WeightTo">
                         </div>
+                        <input type="hidden" name="sortOrder" id="sortOrder" value="@ViewBag.SortOrder">
+
+
+                        <!-- Sort buttons -->
+
                     </div>
                 </div>
             </div>

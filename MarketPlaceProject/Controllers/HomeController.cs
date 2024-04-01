@@ -89,10 +89,14 @@ namespace MarketPlaceProject.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> FilterResults(int? modelYearFrom = null, int? modelYearTo = null, string useType = null, decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null, decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null, string subcategoryName = "")
+        public async Task<ActionResult> FilterResults(
+            int? modelYearFrom = null, int? modelYearTo = null, string useType = null,
+            decimal? powerFrom = null, decimal? powerTo = null, decimal? heightFrom = null,
+            decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null,
+            string subcategoryName = "", string sortOrder = "")
         {
             // Fetch filtered items based on the provided criteria, including subcategoryName
-            var items = await _itemService.GetFilteredAsync(modelYearFrom, modelYearTo, useType, powerFrom, powerTo, heightFrom, heightTo, weightFrom, weightTo, subcategoryName);
+            var items = await _itemService.GetFilteredAsync(modelYearFrom, modelYearTo, useType, powerFrom, powerTo, heightFrom, heightTo, weightFrom, weightTo, subcategoryName, sortOrder);
 
             var itemDTOs = _mapper.Map<IEnumerable<ItemDTO>>(items); // Map domain models to DTOs
 
@@ -110,6 +114,7 @@ namespace MarketPlaceProject.Controllers
             ViewBag.WeightFrom = weightFrom;
             ViewBag.WeightTo = weightTo;
             ViewBag.SubcategoryName = subcategoryName;
+            ViewBag.SortOrder = sortOrder;
 
             return View("Result", itemDTOs); // Return the filtered items to the Result view
         }
