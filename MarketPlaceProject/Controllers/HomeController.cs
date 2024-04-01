@@ -1,6 +1,6 @@
 
-﻿using DomainLayer.Interfaces;
-﻿using MarketPlaceProject.Models;
+using DomainLayer.Interfaces;
+using MarketPlaceProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -59,6 +59,10 @@ namespace MarketPlaceProject.Controllers
 
         public async Task<ActionResult> Search()
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             var categories = await _categoryService.GetAllAsync();
             ViewBag.Categories = categories; // Pass categories to the view via ViewBag
             return View();
@@ -84,7 +88,7 @@ namespace MarketPlaceProject.Controllers
         [HttpGet]
         public async Task<ActionResult> SearchItemsBySubcategoryName(string subcategoryName)
         {
-            return await Task.Run(() =>RedirectToAction("FilterResults", new { subcategoryName = subcategoryName }));
+            return await Task.Run(() => RedirectToAction("FilterResults", new { subcategoryName = subcategoryName }));
         }
 
 
@@ -95,6 +99,11 @@ namespace MarketPlaceProject.Controllers
             decimal? heightTo = null, decimal? weightFrom = null, decimal? weightTo = null,
             string subcategoryName = "", string sortOrder = "")
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             // Fetch filtered items based on the provided criteria, including subcategoryName
             var items = await _itemService.GetFilteredAsync(modelYearFrom, modelYearTo, useType, powerFrom, powerTo, heightFrom, heightTo, weightFrom, weightTo, subcategoryName, sortOrder);
 
@@ -133,6 +142,11 @@ namespace MarketPlaceProject.Controllers
 
         public async Task<ActionResult> ProductSummary(int id, string subcategoryName)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             // Fetch categories for the filter sidebar in the results page
             var categories = await _categoryService.GetAllAsync();
             ViewBag.Categories = categories;
@@ -181,6 +195,8 @@ namespace MarketPlaceProject.Controllers
         {
             if (await isValidUser(user.UsernameOrEmail, user.Password))
             {
+                Session["Username"] = user.UsernameOrEmail;
+                Debug.WriteLine(Session["Username"]);
                 return RedirectToAction("Search");
             }
 
@@ -238,6 +254,10 @@ namespace MarketPlaceProject.Controllers
 
         public async Task<ActionResult> Compare(string subcategoryName)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login");
+            }
 
             // Fetch categories for the filter sidebar in the results page
             var categories = await _categoryService.GetAllAsync();
