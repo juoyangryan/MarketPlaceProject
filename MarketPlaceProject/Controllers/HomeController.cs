@@ -1,6 +1,6 @@
 
-﻿using DomainLayer.Interfaces;
-﻿using MarketPlaceProject.Models;
+using DomainLayer.Interfaces;
+using MarketPlaceProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -84,7 +84,7 @@ namespace MarketPlaceProject.Controllers
         [HttpGet]
         public async Task<ActionResult> SearchItemsBySubcategoryName(string subcategoryName)
         {
-            return await Task.Run(() =>RedirectToAction("FilterResults", new { subcategoryName = subcategoryName }));
+            return await Task.Run(() => RedirectToAction("FilterResults", new { subcategoryName = subcategoryName }));
         }
 
 
@@ -176,6 +176,7 @@ namespace MarketPlaceProject.Controllers
         {
             if (await isValidUser(user.UsernameOrEmail, user.Password))
             {
+                Session["Username"] = user.Username;
                 return RedirectToAction("Search");
             }
 
