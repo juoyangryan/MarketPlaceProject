@@ -16,9 +16,9 @@
         <div class="row">
             @foreach (var product in Model)
             {
-                <div class="col-3 mb-4">
+                <div class="col-md-6 col-lg-4 col-xxl-3 mb-4">
                     <div class="card">
-                        <img src="@Url.Content(product.ImageUrl)" class="card-img-top img-fluid" alt="Product Image">
+                        <img src="@Url.Content(product.ImageUrl)" class="card-img-top img-fluid" alt="Product Image" style="height: 15vw; object-fit: cover;">
 
 
                         <div class="card-body text-center">
@@ -61,7 +61,6 @@
         $(document).ready(function () {
             // Event handler for the "Compare" button click
             $('#compareButton').click(function () {
-                console.log("here")
                 // Array to store the IDs of selected items
                 var selectedItems = [];
 
@@ -78,8 +77,6 @@
                     alert('Please select at least 2 and at most 4 items to compare.');
                     return; // Exit the function if the number of selected items is invalid
                 }
-
-                console.log(selectedItems)
 
                 // Redirect to the Compare action with the selected item IDs
                 window.location.href = '@Url.Action("Compare", "Home")' + '?itemIds=' + selectedItems.join(',');
