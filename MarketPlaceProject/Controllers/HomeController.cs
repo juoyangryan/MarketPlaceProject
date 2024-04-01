@@ -126,15 +126,20 @@ namespace MarketPlaceProject.Controllers
         }
 
 
-        public async Task<ActionResult> ProductSummary(int id)
+        public async Task<ActionResult> ProductSummary(int id, string subcategoryName)
         {
             // Fetch categories for the filter sidebar in the results page
             var categories = await _categoryService.GetAllAsync();
             ViewBag.Categories = categories;
-
+           
+            
             // Find Product from DB
             Item item = await _itemService.GetByIdAsync(id);
+            //pass subcategory to breadcrumb
+            ViewBag.BreadcrumbName = "Item Detail";
+            ViewBag.SubcategoryName = subcategoryName;
             // Dummy Data for now
+
             Product product = new Product
             {
                 ProductID = item.ID,
@@ -151,6 +156,7 @@ namespace MarketPlaceProject.Controllers
                 Weight = item.Weight,
                 ImageUrl = item.ImageUrl
             };
+            
             if (product == null)
             {
                 return HttpNotFound();
@@ -225,7 +231,7 @@ namespace MarketPlaceProject.Controllers
             }
         }
 
-        public async Task<ActionResult> Compare()
+        public async Task<ActionResult> Compare(string subcategoryName)
         {
 
             // Fetch categories for the filter sidebar in the results page
@@ -235,7 +241,9 @@ namespace MarketPlaceProject.Controllers
             int[] ids = Array.ConvertAll(Request.Params["itemIds"].Split(','), s => int.Parse(s));
 
             var comp_items = await _itemService.GetByIdListAsync(ids);
-
+            //pass subcategory to breadcrumb
+            ViewBag.SubcategoryName = subcategoryName;
+            ViewBag.BreadcrumbName = "Compare";
             List<Product> products = new List<Product>();
 
             foreach (var item in comp_items)
@@ -257,6 +265,7 @@ namespace MarketPlaceProject.Controllers
                     ImageUrl = item.ImageUrl
                 });
             }
+            
             return View(products);
         }
 

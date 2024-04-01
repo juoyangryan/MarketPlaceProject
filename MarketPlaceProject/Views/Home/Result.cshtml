@@ -35,7 +35,7 @@
                                         Compare
                                     </label>
                                 </div>
-                                @Html.ActionLink("View Details", "ProductSummary", new { id = product.ID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("View Details", "ProductSummary", new { id = product.ID, subcategoryName = ViewBag.SubcategoryName }, new { @class = "btn btn-primary" })
                             </div>
                         </div>
                     </div>
@@ -78,8 +78,17 @@
                     return; // Exit the function if the number of selected items is invalid
                 }
 
-                // Redirect to the Compare action with the selected item IDs
-                window.location.href = '@Url.Action("Compare", "Home")' + '?itemIds=' + selectedItems.join(',');
+
+                var subcategoryName = '@ViewBag.SubcategoryName'; // Get the subcategory name from ViewBag
+                window.location.href = '@Url.Action("Compare", "Home")' + '?subcategoryName=' + encodeURIComponent(subcategoryName) + '&itemIds=' + selectedItems.join(',');
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.use-type-checkbox').on('change', function () {
+                // When any checkbox is clicked
+                $('.use-type-checkbox').not(this).prop('checked', false); // Uncheck all other checkboxes
             });
         });
     </script>

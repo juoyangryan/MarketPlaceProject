@@ -29,19 +29,19 @@
                         <div>
                             <label class="form-label fw-bold">Use Type</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="useType" value="Commercial" id="useTypeCommercial" @(ViewBag.UseType == "Commercial" ? "checked" : "")>
+                                <input class="form-check-input use-type-checkbox" type="checkbox" name="useType" value="Commercial" id="useTypeCommercial" @(ViewBag.UseType == "Commercial" ? "checked" : "")>
                                 <label class="form-check-label" for="useTypeCommercial">
                                     Commercial
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="useType" value="Residential" id="useTypeResidential" @(ViewBag.UseType == "Residential" ? "checked" : "")>
+                                <input class="form-check-input use-type-checkbox" type="checkbox" name="useType" value="Residential" id="useTypeResidential" @(ViewBag.UseType == "Residential" ? "checked" : "")>
                                 <label class="form-check-label" for="useTypeResidential">
                                     Residential
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="useType" value="Industrial" id="useTypeIndustrial" @(ViewBag.UseType == "Industrial" ? "checked" : "")>
+                                <input class="form-check-input use-type-checkbox" type="checkbox" name="useType" value="Industrial" id="useTypeIndustrial" @(ViewBag.UseType == "Industrial" ? "checked" : "")>
                                 <label class="form-check-label" for="useTypeIndustrial">
                                     Industrial
                                 </label>
@@ -99,6 +99,8 @@
         </div>
     </div>
 </form>
+
+
 
 
 

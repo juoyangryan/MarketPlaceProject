@@ -1,6 +1,21 @@
 ﻿<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">@Html.ActionLink("Mechanical", "Search")</li>
-        <li class="breadcrumb-item active" aria-current="page">HVAC Fans</li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Search", "Search")
+        </li>
+        @if (!string.IsNullOrEmpty((string)ViewBag.SubcategoryName))
+        {
+            <li class="breadcrumb-item">
+                @Html.ActionLink((string)ViewBag.SubcategoryName, "SearchItemsBySubcategoryName", "Home", new { subcategoryName = (string)ViewBag.SubcategoryName }, null)
+            </li>
+        }
+        else
+        {
+            <li class="breadcrumb-item active" aria-current="page">Default Page</li>
+        }
+        @if (!string.IsNullOrEmpty((string)ViewBag.BreadcrumbName))
+        {
+             <li class="breadcrumb-item active" aria-current="page">@ViewBag.BreadcrumbName</li>
+        }
     </ol>
 </nav>
